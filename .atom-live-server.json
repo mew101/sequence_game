@@ -1,0 +1,5 @@
+// .atom-live-server.json
+// open live server in Chrome
+{
+  "browser": "google chrome"
+}

@@ -18,7 +18,21 @@ function nextSequence() {
 
 function playSound(name){
   var audio = new Audio("sounds/" + name +'.mp3');
-  audio.play();
+  //audio.play();
+}
+function pressedShadow(currentColor){
+  $(".btn").on("click", function(){
+    var userColor = this.id;
+    $("." + userColor).addClass("pressed");
+    setTimeout(function(){
+      $("." + userColor).removeClass("pressed");
+      }, 100);
+  });
+}
+
+
+
+
   // switch (name) {
   //   case "green":
   //     var green = new Audio("sounds/green.mp3");
@@ -45,9 +59,9 @@ function playSound(name){
 
 
 
-     }
-
-}
+    // }
 
 
+
+pressedShadow();
 nextSequence();

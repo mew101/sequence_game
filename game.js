@@ -1,67 +1,44 @@
-buttonColors = ["green", "red", "yellow", "blue"];
-gamePattern = [];
-userClickedPattern = [];
+let buttonColors = ["green", "red", "yellow", "blue"];
+let gamePattern = [];
+let userClickedPattern = [];
+let level = 0;
+let started = false;
+$(document).on("keydown", function(){
+  if(!started){
+    $("#level-title").text("level " + level);
+    nextSequence();
+    started = true;
+  }});
 
 function nextSequence() {
-  var randomNumber = Math.floor(Math.random() *4);
-  var chosenColor = buttonColors[randomNumber];
+  level ++;
+  $("#level-title").html("level " + level);
+  let randomNumber = Math.floor(Math.random() *4);
+  let chosenColor = buttonColors[randomNumber];
   gamePattern.push(chosenColor);
 
   $("#" + chosenColor).fadeOut(100).fadeIn(100).fadeOut(100).fadeIn(100);
   playSound(chosenColor);
+
 }
-// $(".btn").on("click", function(){
-//   var userColor = this.id;
-//   userClickedPattern.push(userColor);
-// });
+$(".btn").on("click", function(){
+  var userColor = this.id;
+  userClickedPattern.push(userColor);
+  playSound(userColor);
+  pressedShadow(userColor);
+});
 
 
 function playSound(name){
-  var audio = new Audio("sounds/" + name +'.mp3');
-  //audio.play();
+  let audio = new Audio("sounds/" + name +'.mp3');
+  audio.play();
 }
 function pressedShadow(currentColor){
   $(".btn").on("click", function(){
-    var userColor = this.id;
+    let userColor = this.id;
     $("." + userColor).addClass("pressed");
     setTimeout(function(){
       $("." + userColor).removeClass("pressed");
       }, 100);
   });
 }
-
-
-
-
-  // switch (name) {
-  //   case "green":
-  //     var green = new Audio("sounds/green.mp3");
-  //     //green.play();
-  //     console.log("g");
-  //     break;
-  //   case "red":
-  //     var red = new Audio("sounds/red.mp3");
-  //     //red.play();
-  //     console.log("r");
-  //     break;
-  //   case "yellow":
-  //     var yellow = new Audio("sounds/yellow.mp3");
-  //     //yellow.play();
-  //     console.log("y");
-  //     break;
-  //   case "blue":
-  //     var blue = new Audio("sounds/blue.mp3");
-  //     //blue.play();
-  //     console.log("b");
-  //     break;
-  //   default: console.log("something is broken.");
-
-
-
-
-    // }
-
-
-
-pressedShadow();
-nextSequence();
